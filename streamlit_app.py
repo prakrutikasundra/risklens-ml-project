@@ -12,7 +12,7 @@ import requests
 import streamlit as st
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-API_URL = os.getenv("LOAN_API_URL", "http://127.0.0.1:5000")
+API_URL = https://risklens-ml-project-1.onrender.com
 TARGET_VARIABLE = "default"
 FEATURE_ORDER = [
     "Age", "Income", "LoanAmount", "CreditScore", "MonthsEmployed", "NumCreditLines",
@@ -308,7 +308,6 @@ def about_page() -> None:
     st.markdown('<div class="section-title">About RiskLens</div>', unsafe_allow_html=True)
     st.markdown('<div class="card"><p>RiskLens is a local decision-support interface for the existing loan-default model. Streamlit collects and presents inputs; Flask validates requests and runs the copied original encoders, scaler, and classifier. This separation keeps the browser UI independent from model execution while preserving the original feature order and preprocessing.</p></div>', unsafe_allow_html=True)
 
-start_flask_backend()
 
 page = render_header()
 try:
