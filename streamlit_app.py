@@ -8,7 +8,7 @@ import pandas as pd
 import requests
 import streamlit as st
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parent
 API_URL = os.getenv("LOAN_API_URL", "http://127.0.0.1:5000")
 TARGET_VARIABLE = "default"
 FEATURE_ORDER = [
