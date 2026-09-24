@@ -27,31 +27,45 @@ CATEGORICAL_DEFAULTS = {
     "LoanPurpose": ["Other", "Auto", "Business", "Education", "Home"], "HasCoSigner": ["No", "Yes"],
 }
 def start_flask_backend() -> None:
-    """Start the existing Flask API locally for the Streamlit deployment."""
-    try:
-        requests.get("http://127.0.0.1:5000/health", timeout=1)
+    """Start the Flask API locally for Streamlit Cloud."""
+    backend_file = PROJECT_ROOT / "backend" / "app.py"
+
+    if not backend_file.exists():
+        st.error(f"Backend file not found: {backend_file}")
         return
+
+    try:
+        response = requests.get(
+            "http://127.0.0.1:5000/health",
+            timeout=1
+        )
+        if response.ok:
+            return
     except requests.RequestException:
         pass
-
-    backend_file = PROJECT_ROOT / "backend" / "app.py"
 
     subprocess.Popen(
         [sys.executable, str(backend_file)],
         cwd=str(PROJECT_ROOT),
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
         env={**os.environ, "PYTHONUNBUFFERED": "1"},
     )
 
     for _ in range(20):
         time.sleep(0.5)
+
         try:
-            response = requests.get("http://127.0.0.1:5000/health", timeout=1)
+            response = requests.get(
+                "http://127.0.0.1:5000/health",
+                timeout=1
+            )
+
             if response.ok:
                 return
+
         except requests.RequestException:
-            continue
+            pass
+
+    st.error("Flask backend failed to start.")
 st.set_page_config(page_title="RiskLens | Loan Default Intelligence", page_icon="RL", layout="wide", initial_sidebar_state="collapsed")
 
 
