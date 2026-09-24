@@ -12,7 +12,7 @@ import requests
 import streamlit as st
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-API_URL = https://risklens-ml-project-1.onrender.com
+API_URL = "https://risklens-ml-project-1.onrender.com"
 TARGET_VARIABLE = "default"
 FEATURE_ORDER = [
     "Age", "Income", "LoanAmount", "CreditScore", "MonthsEmployed", "NumCreditLines",
