@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.streamlit/secrets.toml
+artifacts/*.joblib
+artifacts/*.pkl
+reports/figures/*.png
+*.ipynb_checkpoints/
