@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 import os
+import sys
+import subprocess
+import time
 from pathlib import Path
 
 import pandas as pd
@@ -23,7 +26,32 @@ CATEGORICAL_DEFAULTS = {
     "HasMortgage": ["No", "Yes"], "HasDependents": ["No", "Yes"],
     "LoanPurpose": ["Other", "Auto", "Business", "Education", "Home"], "HasCoSigner": ["No", "Yes"],
 }
+def start_flask_backend() -> None:
+    """Start the existing Flask API locally for the Streamlit deployment."""
+    try:
+        requests.get("http://127.0.0.1:5000/health", timeout=1)
+        return
+    except requests.RequestException:
+        pass
 
+    backend_file = PROJECT_ROOT / "backend" / "app.py"
+
+    subprocess.Popen(
+        [sys.executable, str(backend_file)],
+        cwd=str(PROJECT_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        env={**os.environ, "PYTHONUNBUFFERED": "1"},
+    )
+
+    for _ in range(20):
+        time.sleep(0.5)
+        try:
+            response = requests.get("http://127.0.0.1:5000/health", timeout=1)
+            if response.ok:
+                return
+        except requests.RequestException:
+            continue
 st.set_page_config(page_title="RiskLens | Loan Default Intelligence", page_icon="RL", layout="wide", initial_sidebar_state="collapsed")
 
 
@@ -266,6 +294,7 @@ def about_page() -> None:
     st.markdown('<div class="section-title">About RiskLens</div>', unsafe_allow_html=True)
     st.markdown('<div class="card"><p>RiskLens is a local decision-support interface for the existing loan-default model. Streamlit collects and presents inputs; Flask validates requests and runs the copied original encoders, scaler, and classifier. This separation keeps the browser UI independent from model execution while preserving the original feature order and preprocessing.</p></div>', unsafe_allow_html=True)
 
+start_flask_backend()
 
 page = render_header()
 try:
