@@ -182,7 +182,19 @@ apply_theme()
 
 @st.cache_data(show_spinner=False)
 def load_dataset() -> pd.DataFrame:
-    return pd.read_csv(PROJECT_ROOT / "Loan_default.csv")
+    dataset_path = PROJECT_ROOT / "Loan_default.csv"
+
+    if not dataset_path.exists():
+        raise FileNotFoundError(
+            f"Loan_default.csv not found at: {dataset_path}"
+        )
+
+    df = pd.read_csv(dataset_path)
+
+    if df.empty:
+        raise ValueError("Loan_default.csv is empty.")
+
+    return df
 
 
 def styled_dataframe(data: pd.DataFrame) -> pd.io.formats.style.Styler:
