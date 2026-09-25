@@ -95,10 +95,7 @@ def apply_theme() -> None:
       .stApp:has(.theme-dark) [data-baseweb="input"] input,.stApp:has(.theme-dark) [data-baseweb="select"] span,.stApp:has(.theme-dark) textarea{{color:var(--rl-text)!important;-webkit-text-fill-color:var(--rl-text)!important}}
       .stApp:has(.theme-dark) [data-baseweb="popover"],.stApp:has(.theme-dark) [role="listbox"]{{background:var(--rl-surface)!important;color:var(--rl-text)!important}}
       /* Glide Data Grid paints its own canvas, so set its native colour tokens as well as its shell. */
-      [data-testid="stDataFrame"]{{--gdg-bg-cell:var(--rl-table-bg);--gdg-bg-cell-medium:var(--rl-table-bg);--gdg-bg-header:var(--rl-table-header);--gdg-bg-header-has-focus:var(--rl-table-header);--gdg-bg-header-hovered:var(--rl-table-hover);--gdg-text-dark:var(--rl-table-text);--gdg-text-medium:var(--rl-table-muted);--gdg-text-light:var(--rl-table-muted);--gdg-border-color:var(--rl-border);--gdg-horizontal-border-color:var(--rl-border);--gdg-accent-color:#2563eb;--gdg-accent-light:var(--rl-table-hover);background:var(--rl-table-bg)!important;border:1px solid var(--rl-border)!important;border-radius:12px;overflow:auto}}
-      [data-testid="stDataFrame"] [role="grid"],[data-testid="stDataFrame"] .dvn-scroller,[data-testid="stDataFrame"] canvas{{background:var(--rl-table-bg)!important}}
-      .stApp:has(.theme-dark) [data-testid="stDataFrame"],.stApp:has(.theme-dark) [data-testid="stDataFrame"] *{{color:var(--rl-table-text)!important}}
-      .stApp:has(.theme-dark) [data-testid="stDataFrame"] button{{background:#132e4f!important;border-color:var(--rl-border)!important;color:var(--rl-table-text)!important}}
+     
       .stApp:has(.theme-dark) [data-testid="stMetric"]{{background:var(--rl-surface-alt);border:1px solid var(--rl-border);border-radius:12px;padding:.7rem}}
       .stApp:has(.theme-dark) [data-testid="stMetric"] *,.stApp:has(.theme-dark) .stSubheader{{color:var(--rl-text)!important}}
       .stApp:has(.theme-dark) [data-testid="stAlert"],.stApp:has(.theme-dark) [data-testid="stAlert"]>div{{background:#102a47!important;border-color:#294f78!important;color:var(--rl-text)!important}}
