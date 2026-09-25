@@ -128,6 +128,14 @@ st.markdown("""
   div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"] label:has(input:checked){background:#e8f0ff;color:#1d4ed8;font-weight:750}
   div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"] label:has(input:checked)::after{content:"";position:absolute;left:22%;right:22%;bottom:5px;height:2px;border-radius:2px;background:#2563eb;animation:nav-in .18s ease-out}
   div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"] label>div:first-child{display:none!important}
+  div[data-testid="stHorizontalBlock"]:has(.brand)
+  div[role="radiogroup"] input[type="radio"]{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  width:0!important;
+  height:0!important;
+}
   @keyframes nav-in{from{transform:scaleX(.35);opacity:.35}to{transform:scaleX(1);opacity:1}}
   @media (max-width: 850px){.block-container{padding-top:7.5rem}div[data-testid="stHorizontalBlock"]:has(.brand){padding:.7rem 1rem;min-height:86px}div[data-testid="stHorizontalBlock"]:has(.brand)>div:first-child{flex:0 0 auto!important;width:auto!important}div[data-testid="stHorizontalBlock"]:has(.brand)>div:last-child{min-width:0!important}div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"]{gap:0;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"] label{font-size:.78rem;padding:.42rem .56rem!important;white-space:nowrap}.brand{font-size:1.08rem}.brand::before{width:26px;height:26px}}
   .dashboard-hero{position:relative;overflow:hidden;min-height:345px;padding:3.1rem;border-radius:24px;background:linear-gradient(115deg,#102a43 0%,#173c68 52%,#1d4ed8 100%);box-shadow:0 20px 44px rgba(15,42,67,.19);animation:fade-up .45s ease-out both}.dashboard-hero::after{content:"";position:absolute;width:410px;height:410px;right:-150px;top:-245px;border:50px solid rgba(147,197,253,.14);border-radius:50%}.dashboard-hero h1{position:relative;z-index:1;max-width:690px;margin:.65rem 0 .9rem;color:#fff;font-size:clamp(2.3rem,4vw,3.7rem);line-height:1.04;letter-spacing:-.055em}.dashboard-hero p{position:relative;z-index:1;max-width:610px;margin:0;color:#dbeafe;font-size:1.05rem;line-height:1.65}.dashboard-eyebrow{position:relative;z-index:1;display:inline-flex;padding:.38rem .7rem;border:1px solid rgba(191,219,254,.25);border-radius:999px;background:rgba(15,42,67,.25);color:#bfdbfe;font-size:.73rem;font-weight:750;letter-spacing:.11em}.hero-facts{position:relative;z-index:1;display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.7rem}.hero-fact{padding:.6rem .75rem;border-radius:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.13);color:#e0efff;font-size:.84rem}.hero-fact b{color:#fff}.dashboard-title{margin:2.4rem 0 .25rem;font-size:1.55rem;font-weight:820;letter-spacing:-.035em;color:#102a43}.dashboard-intro{margin:0 0 1.15rem;color:#64748b}.stat-card,.detail-card,.cta-panel{background:#fff;border:1px solid #e7edf5;border-radius:17px;box-shadow:0 5px 18px rgba(15,23,42,.045);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}.stat-card{height:100%;padding:1.25rem}.stat-card:hover,.detail-card:hover{transform:translateY(-4px);border-color:#bfdbfe;box-shadow:0 14px 28px rgba(30,64,175,.11)}.stat-label{font-size:.73rem;font-weight:760;letter-spacing:.095em;text-transform:uppercase;color:#64748b}.stat-value{margin-top:.45rem;color:#102a43;font-size:1.5rem;font-weight:830;letter-spacing:-.035em}.stat-subtitle{margin-top:.2rem;color:#94a3b8;font-size:.84rem}.detail-card{height:100%;padding:1.25rem}.detail-card h3{margin:0 0 .55rem;color:#102a43;font-size:1rem}.detail-card p{margin:.28rem 0;color:#64748b;font-size:.92rem}.detail-card strong{color:#334155}.dataset-card{padding:1rem 1.1rem;background:#fff;border:1px solid #e7edf5;border-radius:17px;box-shadow:0 5px 18px rgba(15,23,42,.035)}.cta-panel{margin-top:2.3rem;padding:2rem 2.1rem;background:linear-gradient(120deg,#eff6ff,#fff)}.cta-panel h2{margin:0;color:#102a43;font-size:1.55rem;letter-spacing:-.035em}.cta-panel p{margin:.45rem 0 1.1rem;color:#64748b}.dashboard-action div[data-testid="stButton"] button{padding:.7rem 1.1rem;box-shadow:0 9px 20px rgba(37,99,235,.2);transition:transform .18s ease,box-shadow .18s ease,background .18s ease}.dashboard-action div[data-testid="stButton"] button:hover{transform:translateY(-2px);box-shadow:0 13px 25px rgba(37,99,235,.28)}@keyframes fade-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -198,15 +206,16 @@ def api_metadata() -> dict:
 
 
 def render_header() -> str:
-    left, navigation, theme_control = st.columns([1.3, 3, 0.42])
+    left, navigation, theme_control = st.columns([1.35, 4, 0.42])
     with left:
-        st.markdown('<div class="brand">Risk<span>Lens</span></div>', unsafe_allow_html=True)
+        st.markdown( '<div class="brand">' '<div class="brand-logo">RL</div>' '<div class="brand-text">Risk<span>Lens</span></div>' '</div>', unsafe_allow_html=True )
+
     with navigation:
-        page = st.radio("Navigation", ["Dashboard", "Prediction", "Dataset Overview", "Model Information", "About"], horizontal=True, label_visibility="collapsed", key="nav_page")
+        page = st.radio( "Navigation", [ "🏠 Dashboard", "🎯 Prediction", "📊 Dataset", "🤖 Model", "ℹ️ About" ], horizontal=True, label_visibility="collapsed", key="nav_page" )
     with theme_control:
         is_dark = st.session_state["theme"] == "dark"
         st.button("☀️" if is_dark else "🌙", key="theme_toggle", on_click=toggle_theme, help="Switch to Light Mode" if is_dark else "Switch to Dark Mode")
-    return page
+    return page.split(" ", 1)[1]
 
 
 def go_to_prediction() -> None:
@@ -310,12 +319,24 @@ def about_page() -> None:
 
 
 page = render_header()
+
 try:
     dataset = load_dataset()
 except Exception as exc:
-    st.error(f"Unable to read the copied dataset: {exc}"); st.stop()
-if page == "Dashboard": dashboard(dataset)
-elif page == "Prediction": prediction_page()
-elif page == "Dataset Overview": dataset_page(dataset)
-elif page == "Model Information": model_page()
-else: about_page()
+    st.error(f"Unable to read the copied dataset: {exc}")
+    st.stop()
+
+if page == "Dashboard":
+    dashboard(dataset)
+
+elif page == "Prediction":
+    prediction_page()
+
+elif page == "Dataset":
+    dataset_page(dataset)
+
+elif page == "Model":
+    model_page()
+
+elif page == "About":
+    about_page()
