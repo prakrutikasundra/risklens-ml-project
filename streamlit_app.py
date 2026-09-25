@@ -225,7 +225,7 @@ def render_header() -> str:
         st.markdown(
             '''
             <div class="brand">
-                # <div class="brand-logo">RL</div>
+               
                 <div class="brand-text">Risk<span>Lens</span></div>
             </div>
             ''',
