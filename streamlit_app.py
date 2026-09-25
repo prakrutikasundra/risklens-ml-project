@@ -352,11 +352,75 @@ def prediction_page() -> None:
 
 
 def dataset_page(df: pd.DataFrame) -> None:
-    st.markdown('<div class="section-title">Dataset overview</div><p class="muted">Local copy of the source dataset used for this application.</p>', unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="section-title">Dataset overview</div>'
+        '<p class="muted">Local copy of the source dataset used for this application.</p>',
+        unsafe_allow_html=True
+    )
+
+    # Dataset check
+    if df is None or df.empty:
+        st.warning("Dataset is empty or could not be loaded.")
+        return
+
+    # Dataset information
     a, b, c = st.columns(3)
-    a.metric("Rows", f"{len(df):,}"); b.metric("Columns", len(df.columns)); c.metric("Dataset target column", "Default")
-    st.subheader("Preview"); render_dataframe(df.head(20), use_container_width=True, hide_index=True)
-    st.subheader("Numeric summary"); render_dataframe(df.select_dtypes(include="number").describe().T, use_container_width=True)
+
+    a.metric("Rows", f"{len(df):,}")
+    b.metric("Columns", len(df.columns))
+    c.metric("Dataset target column", "Default")
+
+    # -------------------------
+    # Preview
+    # -------------------------
+    st.subheader("Preview")
+
+    preview_df = df.head(20)
+
+    if preview_df.empty:
+        st.info("No preview data available.")
+    else:
+        st.dataframe(
+            preview_df,
+            use_container_width=True,
+            hide_index=True
+        )
+
+    # -------------------------
+    # Numeric Summary
+    # -------------------------
+    st.subheader("Numeric summary")
+
+    numeric_df = df.select_dtypes(include="number")
+
+    if numeric_df.empty:
+        st.info("No numeric columns available for summary.")
+    else:
+        summary_df = numeric_df.describe().T
+
+        st.dataframe(
+            summary_df,
+            use_container_width=True
+        )
+
+    # -------------------------
+    # Dataset Information
+    # -------------------------
+    st.subheader("Dataset information")
+
+    info_df = pd.DataFrame({
+        "Column": df.columns,
+        "Data Type": df.dtypes.astype(str).values,
+        "Missing Values": df.isnull().sum().values,
+        "Unique Values": df.nunique().values
+    })
+
+    st.dataframe(
+        info_df,
+        use_container_width=True,
+        hide_index=True
+    )
 
 
 def model_page() -> None:
