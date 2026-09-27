@@ -378,6 +378,26 @@ div[data-testid="stHorizontalBlock"]:has(.brand)
     }
 
 }
+/* Dark theme dataframe */
+
+.stApp:has(.theme-dark) [data-testid="stDataFrame"] {{
+    background: #0F1F33 !important;
+    border: 1px solid #294563 !important;
+}}
+
+.stApp:has(.theme-dark) [data-testid="stDataFrame"] [role="grid"] {{
+    background: #0F1F33 !important;
+}}
+
+.stApp:has(.theme-dark) [data-testid="stDataFrame"] [role="columnheader"] {{
+    background: #132E4F !important;
+    color: #EAF2FF !important;
+}}
+
+.stApp:has(.theme-dark) [data-testid="stDataFrame"] [role="gridcell"] {{
+    background: #0F1F33 !important;
+    color: #EAF2FF !important;
+}}
 </style>
 """, unsafe_allow_html=True)
 
