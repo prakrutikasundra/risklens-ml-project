@@ -713,9 +713,59 @@ def model_page() -> None:
 
 
 def about_page() -> None:
-    st.markdown('<div class="section-title">About RiskLens</div>', unsafe_allow_html=True)
-    st.markdown('<div class="card"><p>RiskLens is a local decision-support interface for the existing loan-default model. Streamlit collects and presents inputs; Flask validates requests and runs the copied original encoders, scaler, and classifier. This separation keeps the browser UI independent from model execution while preserving the original feature order and preprocessing.</p></div>', unsafe_allow_html=True)
 
+    st.markdown(
+        '<div class="section-title">About RiskLens</div>'
+        '<p class="muted">Loan Default Intelligence powered by Machine Learning.</p>',
+        unsafe_allow_html=True
+    )
+
+    # About RiskLens visual
+    about_image = PROJECT_ROOT / "assets" / "about_risklens.png"
+
+    if about_image.exists():
+        st.image(
+            str(about_image),
+            use_container_width=True
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Project information
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown(
+            """
+            <div class="info-card">
+                <h3>🧠 AI Driven</h3>
+                <p>Machine Learning models analyze loan data and identify default risk.</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col2:
+        st.markdown(
+            """
+            <div class="info-card">
+                <h3>🛡️ Reliable</h3>
+                <p>RiskLens provides consistent and data-driven loan predictions.</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col3:
+        st.markdown(
+            """
+            <div class="info-card">
+                <h3>📊 Data Powered</h3>
+                <p>Insights are generated from historical loan and customer data.</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
 page = render_header()
 
