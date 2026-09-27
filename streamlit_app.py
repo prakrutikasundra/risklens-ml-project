@@ -653,12 +653,7 @@ def prediction_page() -> None:
         summary = pd.DataFrame({"Feature": payload.keys(), "Value": [str(value) for value in payload.values()]})
         render_dataframe(summary, use_container_width=True, hide_index=True)
 
-
 def dataset_page(df: pd.DataFrame) -> None:
-
-    # =========================================================
-    # DATASET HEADER
-    # =========================================================
 
     st.markdown(
         '<div class="section-title">Dataset Overview</div>'
@@ -668,77 +663,101 @@ def dataset_page(df: pd.DataFrame) -> None:
         unsafe_allow_html=True
     )
 
-    # =========================================================
-    # DATASET VALIDATION
-    # =========================================================
-
     if df is None or df.empty:
         st.warning("Dataset is empty or could not be loaded.")
         return
 
     # =========================================================
-    # OVERVIEW METRICS
+    # DATASET SUMMARY
     # =========================================================
 
     st.markdown("### 📊 Dataset Summary")
 
     c1, c2, c3, c4 = st.columns(4)
 
+    missing_total = int(df.isnull().sum().sum())
+
     with c1:
-        st.metric(
-            "📁 Total Rows",
-            f"{len(df):,}"
-        )
+        st.metric("📁 Total Rows", f"{len(df):,}")
 
     with c2:
-        st.metric(
-            "🔢 Total Columns",
-            f"{len(df.columns)}"
-        )
+        st.metric("🔢 Total Columns", f"{len(df.columns)}")
 
     with c3:
-        st.metric(
-            "🎯 Target",
-            TARGET_VARIABLE
-        )
+        st.metric("🎯 Target", TARGET_VARIABLE)
 
     with c4:
-        missing_total = int(df.isnull().sum().sum())
+        st.metric("⚠️ Missing Values", f"{missing_total:,}")
 
-        st.metric(
-            "⚠️ Missing Values",
-            f"{missing_total:,}"
-        )
+    # =========================================================
+    # HELPER FOR DARK/LIGHT TABLE
+    # =========================================================
+
+    def show_dataset_table(data: pd.DataFrame) -> None:
+
+        if st.session_state.get("theme", "light") == "dark":
+
+            styled = (
+                data.style
+                .set_properties(
+                    **{
+                        "background-color": "#0F1F33",
+                        "color": "#EAF2FF",
+                        "border-color": "#294563",
+                    }
+                )
+                .set_table_styles([
+                    {
+                        "selector": "th",
+                        "props": [
+                            ("background-color", "#132E4F"),
+                            ("color", "#EAF2FF"),
+                            ("font-weight", "700"),
+                            ("border-color", "#294563"),
+                        ],
+                    },
+                    {
+                        "selector": "td",
+                        "props": [
+                            ("background-color", "#0F1F33"),
+                            ("color", "#EAF2FF"),
+                            ("border-color", "#294563"),
+                        ],
+                    },
+                ])
+            )
+
+            st.table(styled)
+
+        else:
+
+            st.dataframe(
+                data,
+                use_container_width=True,
+                hide_index=True
+            )
 
     # =========================================================
     # DATASET PREVIEW
     # =========================================================
 
     st.markdown("---")
-
     st.markdown("### 👀 Dataset Preview")
 
-    st.caption(
-        "First 10 records from the dataset."
-    )
+    st.caption("First 10 records from the dataset.")
 
     preview_df = df.head(10)
 
     if preview_df.empty:
         st.info("No preview data available.")
     else:
-        st.dataframe(
-            preview_df,
-            use_container_width=True,
-            hide_index=True
-        )
+        show_dataset_table(preview_df)
 
     # =========================================================
     # NUMERIC SUMMARY
     # =========================================================
 
     st.markdown("---")
-
     st.markdown("### 📈 Numeric Summary")
 
     numeric_df = df.select_dtypes(include="number")
@@ -746,21 +765,16 @@ def dataset_page(df: pd.DataFrame) -> None:
     if numeric_df.empty:
         st.info("No numeric columns available.")
     else:
-        summary_df = numeric_df.describe().T
 
-        summary_df = summary_df.round(2)
+        summary_df = numeric_df.describe().T.round(2)
 
-        st.dataframe(
-            summary_df,
-            use_container_width=True
-        )
+        show_dataset_table(summary_df)
 
     # =========================================================
     # DATASET INFORMATION
     # =========================================================
 
     st.markdown("---")
-
     st.markdown("### 🔍 Dataset Information")
 
     info_df = pd.DataFrame({
@@ -770,14 +784,10 @@ def dataset_page(df: pd.DataFrame) -> None:
         "Unique Values": df.nunique().values
     })
 
-    st.dataframe(
-        info_df,
-        use_container_width=True,
-        hide_index=True
-    )
+    show_dataset_table(info_df)
 
     # =========================================================
-    # CATEGORICAL COLUMNS
+    # CATEGORICAL FEATURES
     # =========================================================
 
     categorical_df = df.select_dtypes(
@@ -787,7 +797,6 @@ def dataset_page(df: pd.DataFrame) -> None:
     if not categorical_df.empty:
 
         st.markdown("---")
-
         st.markdown("### 🏷️ Categorical Features")
 
         categorical_info = pd.DataFrame({
@@ -798,11 +807,7 @@ def dataset_page(df: pd.DataFrame) -> None:
             ]
         })
 
-        st.dataframe(
-            categorical_info,
-            use_container_width=True,
-            hide_index=True
-        )
+        show_dataset_table(categorical_info)
 
     # =========================================================
     # TARGET INFORMATION
@@ -811,19 +816,7 @@ def dataset_page(df: pd.DataFrame) -> None:
     if TARGET_VARIABLE in df.columns:
 
         st.markdown("---")
-
         st.markdown("### 🎯 Target Variable")
-
-        target_counts = df[TARGET_VARIABLE].value_counts(
-            dropna=False
-        )
-
-        target_df = target_counts.reset_index()
-
-        target_df.columns = [
-            "Target Value",
-            "Number of Records"
-        ]
 
         t1, t2 = st.columns(2)
 
@@ -839,11 +832,18 @@ def dataset_page(df: pd.DataFrame) -> None:
                 f"{df[TARGET_VARIABLE].nunique()}"
             )
 
-        st.dataframe(
-            target_df,
-            use_container_width=True,
-            hide_index=True
+        target_counts = df[TARGET_VARIABLE].value_counts(
+            dropna=False
         )
+
+        target_df = target_counts.reset_index()
+
+        target_df.columns = [
+            "Target Value",
+            "Number of Records"
+        ]
+
+        show_dataset_table(target_df)
 
     # =========================================================
     # DATASET STATUS
@@ -859,6 +859,7 @@ def dataset_page(df: pd.DataFrame) -> None:
         st.warning(
             f"⚠️ Dataset contains {missing_total:,} missing values."
         )
+
 
 def model_page() -> None:
 
