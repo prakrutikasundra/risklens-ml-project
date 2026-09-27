@@ -224,8 +224,8 @@ div[data-testid="stButton"] button {
 
     padding: .45rem .4rem !important;
 
-    font-size: .86rem !important;
-    font-weight: 650 !important;
+    font-size: 1rem !important;
+    font-weight: 750 !important;
 
     box-shadow: none !important;
 
