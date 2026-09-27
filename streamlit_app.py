@@ -105,67 +105,7 @@ def apply_theme() -> None:
       div[data-testid="stHorizontalBlock"]:has(.brand) div[data-testid="stButton"] button:hover{{background:#dbeafe;color:#1d4ed8;transform:translateY(-1px)}}
       .stApp:has(.theme-dark) div[data-testid="stHorizontalBlock"]:has(.brand) div[data-testid="stButton"] button{{background:#1b2d47;border-color:#36506f;color:#fde68a}}
       @media (max-width:850px){{div[data-testid="stHorizontalBlock"]:has(.brand)>div:last-child{{flex:0 0 46px!important;width:46px!important}}}}
-@media (max-width: 768px) {{
 
-    div[data-testid="stHorizontalBlock"]:has(.brand) {{
-        padding: 8px 18px !important;
-        min-height: 105px !important;
-        align-items: flex-start !important;
-    }}
-
-    .brand {{
-        margin-top: 2px !important;
-    }}
-
-    .brand-logo {{
-        width: 56px !important;
-        height: 56px !important;
-        font-size: 18px !important;
-    }}
-
-    .brand-text {{
-        font-size: 20px !important;
-    }}
-
-    div[data-testid="stHorizontalBlock"]:has(.brand)
-    div[data-testid="stButton"] button {{
-        min-height: 52px !important;
-        height: 52px !important;
-        min-width: 74px !important;
-        width: auto !important;
-        padding: 0 16px !important;
-        font-size: 22px !important;
-        border-radius: 14px !important;
-    }}
-
-    .hero {{
-        margin-top: 12px !important;
-        padding: 42px 30px !important;
-        border-radius: 28px !important;
-    }}
-
-    .hero h1 {{
-        font-size: 42px !important;
-        line-height: 1.12 !important;
-    }}
-
-    .hero p {{
-        font-size: 18px !important;
-        line-height: 1.65 !important;
-    }}
-
-    .hero-badges {{
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 10px !important;
-    }}
-
-    .hero-badge {{
-        width: auto !important;
-        max-width: 100% !important;
-    }}
-}}
     </style>''', unsafe_allow_html=True)
 
 st.markdown("""
