@@ -514,7 +514,45 @@ def render_header() -> str:
         )
 
     return st.session_state.get("nav_page", "Dashboard")
+def render_footer():
+    st.markdown(
+        """
+        <style>
+        .rl-footer {
+            margin-top: 60px;
+            padding: 22px 10px;
+            border-top: 1px solid #DCE6F2;
+            text-align: center;
+            color: #64748B;
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
 
+        .rl-footer strong {
+            color: #2563EB;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .rl-footer {
+                margin-top: 40px;
+                padding: 18px 8px;
+                font-size: 0.78rem;
+            }
+        }
+        </style>
+
+        <div class="rl-footer">
+            <div>
+                <strong>RiskLens</strong> · Loan Default Intelligence
+            </div>
+            <div>
+                © 2026 RiskLens · ML Prediction System
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 def go_to_prediction() -> None:
     st.session_state["nav_page"] = "Prediction"
 
@@ -701,3 +739,4 @@ elif page == "Model":
 
 elif page == "About":
     about_page()
+render_footer()
