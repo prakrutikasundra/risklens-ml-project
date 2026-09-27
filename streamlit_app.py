@@ -138,38 +138,439 @@ st.markdown("""
   [data-testid="stMetric"]{padding:.9rem 1rem;border:1px solid var(--rl-border,#e5eaf2);border-radius:14px;background:var(--rl-surface,#fff);box-shadow:0 7px 18px rgba(15,46,92,.04)}
   [data-testid="stDataFrame"]{border-radius:12px;overflow:hidden;border:1px solid var(--rl-border,#e5eaf2)}[data-testid="stExpander"]{border-radius:13px;border-color:var(--rl-border,#e5eaf2)}
   form[data-testid="stForm"]{padding:1.3rem;border:1px solid var(--rl-border,#e5eaf2);border-radius:18px;background:var(--rl-surface,#fff);box-shadow:0 12px 28px rgba(15,46,92,.045)}
-  @media (max-width:850px){.block-container{padding-top:7rem;padding-bottom:2rem}.dashboard-hero{min-height:unset;padding:2.35rem 1.65rem;border-radius:20px}.hero-visual{right:1.4rem;bottom:1.3rem;width:25%;min-width:135px}.dashboard-hero h1{max-width:72%;font-size:clamp(2rem,7vw,3.1rem)}.dashboard-hero p{max-width:68%}.dashboard-title{margin-top:2.15rem}.stat-card,.detail-card{margin-bottom:.25rem}}
-  @media (max-width:640px){.block-container{padding-top:6.75rem;padding-left:1rem;padding-right:1rem}.dashboard-hero{padding:2rem 1.35rem}.dashboard-hero h1,.dashboard-hero p{max-width:100%}.dashboard-hero h1{font-size:clamp(2rem,10vw,2.65rem)}.dashboard-hero p{font-size:.96rem}.hero-visual{display:none}.hero-facts{margin-top:1.35rem;gap:.45rem}.hero-fact{font-size:.76rem;padding:.52rem .62rem}.dashboard-title{font-size:1.38rem}.cta-panel{padding:1.55rem}.cta-panel h2{font-size:1.35rem}form[data-testid="stForm"]{padding:1rem;border-radius:14px}div[data-testid="stHorizontalBlock"]:has(.brand){min-height:66px!important;padding:.55rem .75rem!important}.brand{font-size:1rem}.brand::before{width:24px;height:24px}div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"] label{font-size:.72rem;padding:.35rem .46rem!important}}
-  @media (max-width:430px){div[data-testid="stHorizontalBlock"]:has(.brand)>div:first-child{max-width:92px!important;overflow:hidden}.brand span{display:none}.dashboard-hero{border-radius:17px}.stat-card{padding:1.15rem}.hero-fact:last-child{display:none}}
-  /* Modern RiskLens navigation buttons */
+ /* =====================================================
+   RISK LENS RESPONSIVE NAVBAR
+   ===================================================== */
+
+/* Desktop navbar */
+div[data-testid="stHorizontalBlock"]:has(.brand) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+    min-height: 76px;
+    padding: 0.65rem max(1.2rem, calc((100vw - 1180px) / 2));
+
+    margin: 0;
+
+    background: rgba(255,255,255,.96);
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 6px 24px rgba(15,23,42,.08);
+
+    backdrop-filter: blur(14px);
+
+    align-items: center;
+}
+
+/* Logo */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+
+    font-size: 1.25rem;
+    font-weight: 850;
+    letter-spacing: -.04em;
+
+    color: #102a43;
+    white-space: nowrap;
+}
+
+.brand-logo {
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #0f3a90
+    );
+
+    color: white;
+    font-size: .75rem;
+    font-weight: 850;
+
+    box-shadow: 0 6px 15px rgba(37,99,235,.25);
+}
+
+.brand-text span {
+    color: #2563eb;
+}
+
+/* Desktop navigation buttons */
 div[data-testid="stHorizontalBlock"]:has(.brand)
 div[data-testid="stButton"] button {
+
+    min-height: 40px;
+
     background: transparent !important;
     color: #475569 !important;
-    border: none !important;
+
+    border: 1px solid transparent !important;
     border-radius: 10px !important;
-    font-size: 0.88rem !important;
+
+    font-size: .84rem !important;
     font-weight: 650 !important;
-    min-height: 40px !important;
-    padding: 0.45rem 0.55rem !important;
+
+    padding: .4rem .45rem !important;
+
     box-shadow: none !important;
-    transition: all 0.2s ease !important;
+
+    white-space: nowrap;
+
+    transition: all .2s ease !important;
 }
 
 div[data-testid="stHorizontalBlock"]:has(.brand)
 div[data-testid="stButton"] button:hover {
+
     background: #eff6ff !important;
     color: #2563eb !important;
+
+    border-color: #dbeafe !important;
+
     transform: translateY(-1px);
 }
 
 /* Theme button */
 div[data-testid="stHorizontalBlock"]:has(.brand)
 div[data-testid="stButton"]:last-child button {
+
+    min-width: 42px !important;
+    width: 42px !important;
+    height: 40px !important;
+
+    padding: 0 !important;
+
     background: #eff6ff !important;
     color: #2563eb !important;
+
     border: 1px solid #bfdbfe !important;
-    min-width: 42px !important;
+}
+
+/* Mobile hamburger hidden on desktop */
+div[data-testid="stHorizontalBlock"]:has(.brand)
+div[data-testid="stPopover"] {
+    display: none;
+}
+
+.mobile-menu-title {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: .7rem;
+    color: #102a43;
+}
+
+
+/* =====================================================
+   TABLET / MOBILE
+   ===================================================== */
+
+@media (max-width: 850px) {
+
+    /* Header */
+    div[data-testid="stHorizontalBlock"]:has(.brand) {
+
+        min-height: 64px !important;
+
+        padding: .55rem .75rem !important;
+
+        gap: .3rem !important;
+    }
+
+    /* Hide desktop navigation column */
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:nth-child(2) {
+
+        display: none !important;
+    }
+
+    /* Logo column */
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:first-child {
+
+        flex: 1 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+    }
+
+    /* Mobile menu column */
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:nth-child(3) {
+
+        display: flex !important;
+
+        flex: 0 0 46px !important;
+        width: 46px !important;
+    }
+
+    /* Theme column */
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:nth-child(4) {
+
+        display: flex !important;
+
+        flex: 0 0 46px !important;
+        width: 46px !important;
+    }
+
+    /* Mobile hamburger */
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    div[data-testid="stPopover"] > button {
+
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        width: 42px !important;
+        height: 40px !important;
+
+        padding: 0 !important;
+
+        border-radius: 10px !important;
+
+        background: #eff6ff !important;
+        color: #2563eb !important;
+
+        border: 1px solid #bfdbfe !important;
+
+        font-size: 1.25rem !important;
+    }
+
+    /* Logo smaller */
+    .brand {
+        font-size: 1.05rem !important;
+        gap: .45rem !important;
+    }
+
+    .brand-logo {
+        width: 28px !important;
+        height: 28px !important;
+
+        border-radius: 8px !important;
+    }
+
+    /* Theme */
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:nth-child(4)
+    div[data-testid="stButton"] button {
+
+        width: 40px !important;
+        min-width: 40px !important;
+
+        height: 40px !important;
+
+        padding: 0 !important;
+    }
+
+    /* Main content below fixed navbar */
+    .block-container {
+
+        padding-top: 5.2rem !important;
+
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+
+        padding-bottom: 2rem !important;
+    }
+
+    /* Hero */
+    .dashboard-hero {
+
+        min-height: auto !important;
+
+        padding: 2rem 1.3rem !important;
+
+        border-radius: 18px !important;
+    }
+
+    .dashboard-hero h1 {
+
+        max-width: 100% !important;
+
+        font-size: clamp(
+            1.9rem,
+            8vw,
+            2.7rem
+        ) !important;
+
+        line-height: 1.08 !important;
+    }
+
+    .dashboard-hero p {
+
+        max-width: 100% !important;
+
+        font-size: .95rem !important;
+
+        line-height: 1.55 !important;
+    }
+
+    /* Hide desktop illustration */
+    .hero-visual {
+        display: none !important;
+    }
+
+    /* Hero facts */
+    .hero-facts {
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: flex-start !important;
+
+        gap: .45rem !important;
+
+        margin-top: 1.2rem !important;
+    }
+
+    .hero-fact {
+
+        font-size: .78rem !important;
+
+        padding: .5rem .65rem !important;
+    }
+
+    /* Cards */
+    .stat-card,
+    .detail-card,
+    .dataset-card,
+    .card {
+
+        width: 100% !important;
+
+        margin-bottom: .8rem !important;
+    }
+
+    /* Tables */
+    [data-testid="stDataFrame"] {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        overflow-x: auto !important;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONES
+   ===================================================== */
+
+@media (max-width: 500px) {
+
+    .block-container {
+
+        padding-top: 4.9rem !important;
+
+        padding-left: .75rem !important;
+        padding-right: .75rem !important;
+    }
+
+    .brand-text {
+
+        display: none !important;
+    }
+
+    .brand {
+
+        gap: 0 !important;
+    }
+
+    .brand-logo {
+
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .dashboard-hero {
+
+        padding: 1.6rem 1rem !important;
+
+        border-radius: 16px !important;
+    }
+
+    .dashboard-hero h1 {
+
+        font-size: 1.95rem !important;
+
+        line-height: 1.08 !important;
+    }
+
+    .dashboard-hero p {
+
+        font-size: .9rem !important;
+    }
+
+    .dashboard-title {
+
+        font-size: 1.35rem !important;
+    }
+
+    .section-title {
+
+        font-size: 1.45rem !important;
+    }
+
+    .cta-panel {
+
+        padding: 1.25rem !important;
+
+        border-radius: 16px !important;
+    }
+
+    .cta-panel h2 {
+
+        font-size: 1.3rem !important;
+    }
+
+    /* Prediction form */
+    form[data-testid="stForm"] {
+
+        padding: .9rem !important;
+
+        border-radius: 14px !important;
+    }
+
+    /* Make buttons comfortable for touch */
+    div[data-testid="stButton"] button,
+    div[data-testid="stFormSubmitButton"] button {
+
+        min-height: 44px !important;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+   ===================================================== */
+
+@media (max-width: 380px) {
+
+    .block-container {
+
+        padding-left: .6rem !important;
+        padding-right: .6rem !important;
+    }
+
+    .dashboard-hero h1 {
+
+        font-size: 1.75rem !important;
+    }
+
+    .hero-fact {
+
+        width: 100% !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -227,58 +628,81 @@ def api_metadata() -> dict:
     except requests.RequestException:
         return {"categorical_options": CATEGORICAL_DEFAULTS}
 
-def render_header() -> str:
-    left, navigation, theme_control = st.columns([1.5, 4, 0.5])
 
-    with left:
+def render_header() -> str:
+    pages = [
+        ("🏠", "Dashboard"),
+        ("🎯", "Prediction"),
+        ("📊", "Dataset"),
+        ("🤖", "Model"),
+        ("ℹ️", "About"),
+    ]
+
+    current_page = st.session_state.get("nav_page", "Dashboard")
+
+    # Header
+    logo_col, desktop_col, mobile_col, theme_col = st.columns(
+        [1.7, 4.8, 0.65, 0.65],
+        gap="small"
+    )
+
+    # Logo
+    with logo_col:
         st.markdown(
-            '''
+            """
             <div class="brand">
-                 <div class="brand-logo">RL</div>
-                <div class="brand-text">Risk<span>Lens</span></div>
+                <div class="brand-logo">RL</div>
+                <div class="brand-text">
+                    Risk<span>Lens</span>
+                </div>
             </div>
-            ''',
+            """,
             unsafe_allow_html=True
         )
 
-    with navigation:
-        pages = [
-            ("🏠", "Dashboard"),
-            ("🎯", "Prediction"),
-            ("📊", "Dataset"),
-            ("🤖", "Model"),
-            ("ℹ️", "About"),
-        ]
-
-        current_page = st.session_state.get("nav_page", "Dashboard")
-
-        nav_cols = st.columns(5)
+    # Desktop navigation
+    with desktop_col:
+        nav_cols = st.columns(5, gap="small")
 
         for col, (icon, name) in zip(nav_cols, pages):
             with col:
-                # active = current_page == name
-
                 if st.button(
-                    f"{icon}  {name}",
-                    key=f"nav_{name}",
+                    f"{icon} {name}",
+                    key=f"desktop_nav_{name}",
                     use_container_width=True
                 ):
                     st.session_state["nav_page"] = name
                     st.rerun()
 
-    with theme_control:
+    # Mobile hamburger
+    with mobile_col:
+        with st.popover("☰"):
+            st.markdown(
+                "<div class='mobile-menu-title'>RiskLens Menu</div>",
+                unsafe_allow_html=True
+            )
+
+            for icon, name in pages:
+                if st.button(
+                    f"{icon}  {name}",
+                    key=f"mobile_nav_{name}",
+                    use_container_width=True
+                ):
+                    st.session_state["nav_page"] = name
+                    st.rerun()
+
+    # Theme
+    with theme_col:
         is_dark = st.session_state["theme"] == "dark"
 
         st.button(
             "☀️" if is_dark else "🌙",
             key="theme_toggle",
             on_click=toggle_theme,
-            help="Switch to Light Mode" if is_dark else "Switch to Dark Mode"
+            help="Switch theme"
         )
 
-    return st.session_state.get("nav_page", "Dashboard")
-
-
+    return current_page
 
 def go_to_prediction() -> None:
     st.session_state["nav_page"] = "Prediction"
