@@ -105,37 +105,7 @@ def apply_theme() -> None:
       div[data-testid="stHorizontalBlock"]:has(.brand) div[data-testid="stButton"] button:hover{{background:#dbeafe;color:#1d4ed8;transform:translateY(-1px)}}
       .stApp:has(.theme-dark) div[data-testid="stHorizontalBlock"]:has(.brand) div[data-testid="stButton"] button{{background:#1b2d47;border-color:#36506f;color:#fde68a}}
       @media (max-width:850px){{div[data-testid="stHorizontalBlock"]:has(.brand)>div:last-child{{flex:0 0 46px!important;width:46px!important}}}}
-/* DARK TABLE FIX */
 
-.stApp:has(.theme-dark) [data-testid="stDataFrame"] {
-    background: #0F1F33 !important;
-    border: 1px solid #294563 !important;
-}
-
-.stApp:has(.theme-dark) [data-testid="stDataFrame"] [role="columnheader"] {
-    background: #132E4F !important;
-    color: #EAF2FF !important;
-}
-
-.stApp:has(.theme-dark) [data-testid="stDataFrame"] [role="gridcell"] {
-    background: #0F1F33 !important;
-    color: #EAF2FF !important;
-}
-
-.stApp:has(.theme-dark) table {
-    background: #0F1F33 !important;
-    color: #EAF2FF !important;
-}
-
-.stApp:has(.theme-dark) th {
-    background: #132E4F !important;
-    color: #EAF2FF !important;
-}
-
-.stApp:has(.theme-dark) td {
-    background: #0F1F33 !important;
-    color: #EAF2FF !important;
-}
     </style>''', unsafe_allow_html=True)
 
 st.markdown("""
