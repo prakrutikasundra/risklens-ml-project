@@ -5,6 +5,7 @@ import os
 import sys
 import subprocess
 import time
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -704,12 +705,179 @@ def dataset_page(df: pd.DataFrame) -> None:
         hide_index=True
     )
 
-
 def model_page() -> None:
-    st.markdown('<div class="section-title">Model information</div>', unsafe_allow_html=True)
-    st.markdown('<div class="card"><div class="card-title">Algorithm</div><div class="card-value">Logistic Regression Classifier</div><p class="muted">The copied original artifacts apply fitted LabelEncoders to categorical fields, then StandardScaler to the complete 16-feature vector before inference.</p></div>', unsafe_allow_html=True)
-    st.subheader("Target variable"); st.code("default  (0 = No Default, 1 = Default)")
-    st.subheader("Feature order used during inference"); render_dataframe(pd.DataFrame({"Position": range(1, 17), "Feature": FEATURE_ORDER}), hide_index=True, use_container_width=True)
+
+    # =========================================================
+    # MODEL PAGE HEADER
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">Model Performance</div>'
+        '<p class="muted">'
+        'Machine Learning model used for loan default prediction.'
+        '</p>',
+        unsafe_allow_html=True
+    )
+
+    # =========================================================
+    # LOAD MODEL METRICS
+    # =========================================================
+
+    metrics_path = PROJECT_ROOT / "models" / "model_metrics.json"
+
+    metrics = {}
+
+    if metrics_path.exists():
+        try:
+            with open(metrics_path, "r", encoding="utf-8") as file:
+                metrics = json.load(file)
+        except Exception as exc:
+            st.warning(f"Unable to read model metrics: {exc}")
+    else:
+        st.warning("Model metrics file was not found.")
+
+    # =========================================================
+    # MODEL OVERVIEW
+    # =========================================================
+
+    st.markdown("### 🤖 Model Overview")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.info(
+            "**Model Type**\n\n"
+            "Logistic Regression"
+        )
+
+    with col2:
+        st.info(
+            "**Prediction Task**\n\n"
+            "Loan Default Classification"
+        )
+
+    with col3:
+        st.info(
+            "**Target Variable**\n\n"
+            "`default`"
+        )
+
+    # =========================================================
+    # PERFORMANCE METRICS
+    # =========================================================
+
+    st.markdown("### 📊 Performance Metrics")
+
+    # Find common metric names from the JSON file
+    def get_metric(*names):
+        for name in names:
+            if name in metrics:
+                return metrics[name]
+
+        # Also check nested dictionaries
+        for value in metrics.values():
+            if isinstance(value, dict):
+                for name in names:
+                    if name in value:
+                        return value[name]
+
+        return None
+
+    accuracy = get_metric("accuracy", "Accuracy")
+    precision = get_metric("precision", "Precision")
+    recall = get_metric("recall", "Recall")
+    f1 = get_metric("f1", "f1_score", "F1", "F1-score")
+
+    m1, m2, m3, m4 = st.columns(4)
+
+    with m1:
+        if accuracy is not None:
+            st.metric("Accuracy", f"{float(accuracy):.2%}")
+        else:
+            st.metric("Accuracy", "N/A")
+
+    with m2:
+        if precision is not None:
+            st.metric("Precision", f"{float(precision):.2%}")
+        else:
+            st.metric("Precision", "N/A")
+
+    with m3:
+        if recall is not None:
+            st.metric("Recall", f"{float(recall):.2%}")
+        else:
+            st.metric("Recall", "N/A")
+
+    with m4:
+        if f1 is not None:
+            st.metric("F1 Score", f"{float(f1):.2%}")
+        else:
+            st.metric("F1 Score", "N/A")
+
+    # =========================================================
+    # MODEL EXPLANATION
+    # =========================================================
+
+    st.markdown("### 🎯 How the Model Works")
+
+    st.info(
+        "RiskLens uses Logistic Regression to analyze customer and "
+        "loan-related features and classify whether a loan is likely "
+        "to result in default. The trained model works together with "
+        "the preprocessing pipeline before generating the prediction."
+    )
+
+    # =========================================================
+    # INPUT FEATURES
+    # =========================================================
+
+    st.markdown("### 🔢 Model Input Features")
+
+    feature_cols = st.columns(4)
+
+    for index, feature in enumerate(FEATURE_ORDER):
+        with feature_cols[index % 4]:
+            st.markdown(f"• **{feature}**")
+
+    # =========================================================
+    # MODEL ARTIFACTS
+    # =========================================================
+
+    st.markdown("---")
+
+    st.markdown("### 📦 Model Components")
+
+    a, b, c = st.columns(3)
+
+    with a:
+        st.success(
+            "🤖 **Trained Model**\n\n"
+            "`best_model.joblib`"
+        )
+
+    with b:
+        st.success(
+            "⚙️ **Preprocessor**\n\n"
+            "`preprocessor.joblib`"
+        )
+
+    with c:
+        st.success(
+            "📊 **Metrics**\n\n"
+            "`model_metrics.json`"
+        )
+
+    # =========================================================
+    # FINAL MESSAGE
+    # =========================================================
+
+    st.markdown("---")
+
+    st.success(
+        "💡 The trained model, preprocessing pipeline and evaluation "
+        "metrics work together to provide the RiskLens loan default prediction."
+    )
+
 
 def about_page() -> None:
 
