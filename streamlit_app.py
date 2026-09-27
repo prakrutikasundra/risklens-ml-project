@@ -628,8 +628,8 @@ def api_metadata() -> dict:
     except requests.RequestException:
         return {"categorical_options": CATEGORICAL_DEFAULTS}
 
-
 def render_header() -> str:
+
     pages = [
         ("🏠", "Dashboard"),
         ("🎯", "Prediction"),
@@ -640,9 +640,8 @@ def render_header() -> str:
 
     current_page = st.session_state.get("nav_page", "Dashboard")
 
-    # Header
-    logo_col, desktop_col, mobile_col, theme_col = st.columns(
-        [1.7, 4.8, 0.65, 0.65],
+    logo_col, nav_col, menu_col, theme_col = st.columns(
+        [1.8, 5.0, 0.6, 0.6],
         gap="small"
     )
 
@@ -661,21 +660,21 @@ def render_header() -> str:
         )
 
     # Desktop navigation
-    with desktop_col:
+    with nav_col:
         nav_cols = st.columns(5, gap="small")
 
         for col, (icon, name) in zip(nav_cols, pages):
             with col:
                 if st.button(
                     f"{icon} {name}",
-                    key=f"desktop_nav_{name}",
+                    key=f"nav_{name}",
                     use_container_width=True
                 ):
                     st.session_state["nav_page"] = name
                     st.rerun()
 
-    # Mobile hamburger
-    with mobile_col:
+    # Mobile menu
+    with menu_col:
         with st.popover("☰"):
             st.markdown(
                 "<div class='mobile-menu-title'>RiskLens Menu</div>",
@@ -685,7 +684,7 @@ def render_header() -> str:
             for icon, name in pages:
                 if st.button(
                     f"{icon}  {name}",
-                    key=f"mobile_nav_{name}",
+                    key=f"mobile_{name}",
                     use_container_width=True
                 ):
                     st.session_state["nav_page"] = name
@@ -698,8 +697,7 @@ def render_header() -> str:
         st.button(
             "☀️" if is_dark else "🌙",
             key="theme_toggle",
-            on_click=toggle_theme,
-            help="Switch theme"
+            on_click=toggle_theme
         )
 
     return current_page
