@@ -115,7 +115,7 @@ st.markdown("""
   /* Fixed custom navigation shell. The :has selector targets only the header row. */
   div[data-testid="stHorizontalBlock"]:has(.brand){position:fixed;top:0;left:0;right:0;z-index:1000;min-height:76px;padding:0.8rem max(2rem,calc((100vw - 1180px)/2));margin:0;background:rgba(255,255,255,.94);border-bottom:1px solid rgba(226,232,240,.9);box-shadow:0 8px 28px rgba(15,23,42,.08);backdrop-filter:blur(14px);align-items:center;transition:box-shadow .2s ease,background .2s ease}
   div[data-testid="stHorizontalBlock"]:has(.brand)>div{display:flex;align-items:center}
-  .brand{display:flex;align-items:center;gap:.7rem;font-size:1.3rem;font-weight:850;letter-spacing:-.045em;color:#102a43;white-space:nowrap}.brand::before{content:"";display:inline-block;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#0f3a90);box-shadow:0 5px 12px rgba(37,99,235,.25)}.brand span{color:#2563eb}
+  .brand{display:flex;align-items:center;gap:.7rem;font-size:1.3rem;font-weight:850;letter-spacing:-.045em;color:#102a43;white-space:nowrap}.brand span{color:#2563eb}
   
   @keyframes nav-in{from{transform:scaleX(.35);opacity:.35}to{transform:scaleX(1);opacity:1}}
   @media (max-width: 850px){.block-container{padding-top:7.5rem}div[data-testid="stHorizontalBlock"]:has(.brand){padding:.7rem 1rem;min-height:86px}div[data-testid="stHorizontalBlock"]:has(.brand)>div:first-child{flex:0 0 auto!important;width:auto!important}div[data-testid="stHorizontalBlock"]:has(.brand)>div:last-child{min-width:0!important}div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"]{gap:0;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}div[data-testid="stHorizontalBlock"]:has(.brand) div[role="radiogroup"] label{font-size:.78rem;padding:.42rem .56rem!important;white-space:nowrap}.brand{font-size:1.08rem}.brand::before{width:26px;height:26px}}
@@ -650,7 +650,7 @@ def render_header() -> str:
         st.markdown(
             """
             <div class="brand">
-                <div class="brand-logo">RL</div>
+                
                 <div class="brand-text">
                     Risk<span>Lens</span>
                 </div>
