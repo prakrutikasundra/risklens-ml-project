@@ -138,26 +138,26 @@ st.markdown("""
   [data-testid="stMetric"]{padding:.9rem 1rem;border:1px solid var(--rl-border,#e5eaf2);border-radius:14px;background:var(--rl-surface,#fff);box-shadow:0 7px 18px rgba(15,46,92,.04)}
   [data-testid="stDataFrame"]{border-radius:12px;overflow:hidden;border:1px solid var(--rl-border,#e5eaf2)}[data-testid="stExpander"]{border-radius:13px;border-color:var(--rl-border,#e5eaf2)}
   form[data-testid="stForm"]{padding:1.3rem;border:1px solid var(--rl-border,#e5eaf2);border-radius:18px;background:var(--rl-surface,#fff);box-shadow:0 12px 28px rgba(15,46,92,.045)}
- /* =====================================================
+ /* =========================================================
    RISK LENS RESPONSIVE NAVBAR
-   ===================================================== */
+   ========================================================= */
 
-/* Desktop navbar */
 div[data-testid="stHorizontalBlock"]:has(.brand) {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 1000;
 
     min-height: 76px;
-    padding: 0.65rem max(1.2rem, calc((100vw - 1180px) / 2));
+    padding: .8rem max(1rem, calc((100vw - 1180px) / 2));
 
     margin: 0;
 
     background: rgba(255,255,255,.96);
-    border-bottom: 1px solid #e2e8f0;
-    box-shadow: 0 6px 24px rgba(15,23,42,.08);
+    border-bottom: 1px solid #e5eaf2;
+
+    box-shadow: 0 8px 28px rgba(15,23,42,.08);
 
     backdrop-filter: blur(14px);
 
@@ -165,25 +165,27 @@ div[data-testid="stHorizontalBlock"]:has(.brand) {
 }
 
 /* Logo */
+
 .brand {
     display: flex;
     align-items: center;
     gap: .65rem;
 
-    font-size: 1.25rem;
+    white-space: nowrap;
+
+    font-size: 1.3rem;
     font-weight: 850;
-    letter-spacing: -.04em;
+    letter-spacing: -.045em;
 
     color: #102a43;
-    white-space: nowrap;
 }
 
 .brand-logo {
-    display: grid;
-    place-items: center;
-
     width: 34px;
     height: 34px;
+
+    display: grid;
+    place-items: center;
 
     border-radius: 10px;
 
@@ -194,7 +196,8 @@ div[data-testid="stHorizontalBlock"]:has(.brand) {
     );
 
     color: white;
-    font-size: .75rem;
+
+    font-size: .9rem;
     font-weight: 850;
 
     box-shadow: 0 6px 15px rgba(37,99,235,.25);
@@ -204,47 +207,42 @@ div[data-testid="stHorizontalBlock"]:has(.brand) {
     color: #2563eb;
 }
 
-/* Desktop navigation buttons */
+/* Desktop navigation */
+
 div[data-testid="stHorizontalBlock"]:has(.brand)
 div[data-testid="stButton"] button {
-
-    min-height: 40px;
-
     background: transparent !important;
     color: #475569 !important;
 
-    border: 1px solid transparent !important;
+    border: none !important;
     border-radius: 10px !important;
 
-    font-size: .84rem !important;
+    min-height: 40px !important;
+    width: 100% !important;
+
+    padding: .45rem .4rem !important;
+
+    font-size: .86rem !important;
     font-weight: 650 !important;
 
-    padding: .4rem .45rem !important;
-
     box-shadow: none !important;
-
-    white-space: nowrap;
 
     transition: all .2s ease !important;
 }
 
 div[data-testid="stHorizontalBlock"]:has(.brand)
 div[data-testid="stButton"] button:hover {
-
     background: #eff6ff !important;
     color: #2563eb !important;
-
-    border-color: #dbeafe !important;
-
-    transform: translateY(-1px);
 }
 
 /* Theme button */
-div[data-testid="stHorizontalBlock"]:has(.brand)
-div[data-testid="stButton"]:last-child button {
 
-    min-width: 42px !important;
+div[data-testid="stHorizontalBlock"]:has(.brand)
+> div:last-child
+div[data-testid="stButton"] button {
     width: 42px !important;
+    min-width: 42px !important;
     height: 40px !important;
 
     padding: 0 !important;
@@ -255,322 +253,128 @@ div[data-testid="stButton"]:last-child button {
     border: 1px solid #bfdbfe !important;
 }
 
-/* Mobile hamburger hidden on desktop */
+/* Mobile menu hidden on desktop */
+
 div[data-testid="stHorizontalBlock"]:has(.brand)
-div[data-testid="stPopover"] {
+> div:nth-child(3) {
     display: none;
 }
 
-.mobile-menu-title {
-    font-size: 1rem;
-    font-weight: 800;
-    margin-bottom: .7rem;
-    color: #102a43;
-}
-
-
-/* =====================================================
-   TABLET / MOBILE
-   ===================================================== */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 850px) {
 
-    /* Header */
-    div[data-testid="stHorizontalBlock"]:has(.brand) {
-
-        min-height: 64px !important;
-
-        padding: .55rem .75rem !important;
-
-        gap: .3rem !important;
+    .block-container {
+        padding-top: 6.5rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }
 
-    /* Hide desktop navigation column */
-    div[data-testid="stHorizontalBlock"]:has(.brand)
-    > div:nth-child(2) {
+    div[data-testid="stHorizontalBlock"]:has(.brand) {
+        min-height: 68px !important;
 
-        display: none !important;
+        padding: .55rem .8rem !important;
+
+        gap: .25rem;
     }
 
     /* Logo column */
+
     div[data-testid="stHorizontalBlock"]:has(.brand)
     > div:first-child {
-
         flex: 1 1 auto !important;
         width: auto !important;
-        min-width: 0 !important;
     }
 
-    /* Mobile menu column */
+    /* Hide desktop navigation */
+
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:nth-child(2) {
+        display: none !important;
+    }
+
+    /* Show hamburger */
+
     div[data-testid="stHorizontalBlock"]:has(.brand)
     > div:nth-child(3) {
-
         display: flex !important;
 
-        flex: 0 0 46px !important;
-        width: 46px !important;
-    }
+        flex: 0 0 48px !important;
+        width: 48px !important;
 
-    /* Theme column */
-    div[data-testid="stHorizontalBlock"]:has(.brand)
-    > div:nth-child(4) {
-
-        display: flex !important;
-
-        flex: 0 0 46px !important;
-        width: 46px !important;
-    }
-
-    /* Mobile hamburger */
-    div[data-testid="stHorizontalBlock"]:has(.brand)
-    div[data-testid="stPopover"] > button {
-
-        display: flex !important;
-        align-items: center;
         justify-content: center;
+    }
 
-        width: 42px !important;
-        height: 40px !important;
+    /* Hamburger button */
+
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:nth-child(3)
+    [data-testid="stPopover"] > button {
+        width: 44px !important;
+        min-width: 44px !important;
+        height: 42px !important;
 
         padding: 0 !important;
 
-        border-radius: 10px !important;
+        border-radius: 11px !important;
 
         background: #eff6ff !important;
         color: #2563eb !important;
 
         border: 1px solid #bfdbfe !important;
 
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
     }
 
-    /* Logo smaller */
+    /* Theme button */
+
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:last-child {
+        flex: 0 0 48px !important;
+        width: 48px !important;
+    }
+
+    div[data-testid="stHorizontalBlock"]:has(.brand)
+    > div:last-child
+    div[data-testid="stButton"] button {
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+    }
+
+    /* Mobile logo */
+
     .brand {
-        font-size: 1.05rem !important;
-        gap: .45rem !important;
+        font-size: 1.05rem;
     }
 
     .brand-logo {
-        width: 28px !important;
-        height: 28px !important;
-
-        border-radius: 8px !important;
-    }
-
-    /* Theme */
-    div[data-testid="stHorizontalBlock"]:has(.brand)
-    > div:nth-child(4)
-    div[data-testid="stButton"] button {
-
-        width: 40px !important;
-        min-width: 40px !important;
-
-        height: 40px !important;
-
-        padding: 0 !important;
-    }
-
-    /* Main content below fixed navbar */
-    .block-container {
-
-        padding-top: 5.2rem !important;
-
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-
-        padding-bottom: 2rem !important;
-    }
-
-    /* Hero */
-    .dashboard-hero {
-
-        min-height: auto !important;
-
-        padding: 2rem 1.3rem !important;
-
-        border-radius: 18px !important;
-    }
-
-    .dashboard-hero h1 {
-
-        max-width: 100% !important;
-
-        font-size: clamp(
-            1.9rem,
-            8vw,
-            2.7rem
-        ) !important;
-
-        line-height: 1.08 !important;
-    }
-
-    .dashboard-hero p {
-
-        max-width: 100% !important;
-
-        font-size: .95rem !important;
-
-        line-height: 1.55 !important;
-    }
-
-    /* Hide desktop illustration */
-    .hero-visual {
-        display: none !important;
-    }
-
-    /* Hero facts */
-    .hero-facts {
-
-        display: flex !important;
-
-        flex-direction: column !important;
-
-        align-items: flex-start !important;
-
-        gap: .45rem !important;
-
-        margin-top: 1.2rem !important;
-    }
-
-    .hero-fact {
-
-        font-size: .78rem !important;
-
-        padding: .5rem .65rem !important;
-    }
-
-    /* Cards */
-    .stat-card,
-    .detail-card,
-    .dataset-card,
-    .card {
-
-        width: 100% !important;
-
-        margin-bottom: .8rem !important;
-    }
-
-    /* Tables */
-    [data-testid="stDataFrame"] {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        overflow-x: auto !important;
+        width: 31px;
+        height: 31px;
+        border-radius: 9px;
     }
 }
 
+/* Small phones */
 
-/* =====================================================
-   SMALL PHONES
-   ===================================================== */
-
-@media (max-width: 500px) {
+@media (max-width: 430px) {
 
     .block-container {
-
-        padding-top: 4.9rem !important;
-
         padding-left: .75rem !important;
         padding-right: .75rem !important;
     }
 
     .brand-text {
-
-        display: none !important;
+        font-size: .98rem;
     }
 
-    .brand {
-
-        gap: 0 !important;
+    div[data-testid="stHorizontalBlock"]:has(.brand) {
+        padding-left: .65rem !important;
+        padding-right: .65rem !important;
     }
 
-    .brand-logo {
-
-        width: 30px !important;
-        height: 30px !important;
-    }
-
-    .dashboard-hero {
-
-        padding: 1.6rem 1rem !important;
-
-        border-radius: 16px !important;
-    }
-
-    .dashboard-hero h1 {
-
-        font-size: 1.95rem !important;
-
-        line-height: 1.08 !important;
-    }
-
-    .dashboard-hero p {
-
-        font-size: .9rem !important;
-    }
-
-    .dashboard-title {
-
-        font-size: 1.35rem !important;
-    }
-
-    .section-title {
-
-        font-size: 1.45rem !important;
-    }
-
-    .cta-panel {
-
-        padding: 1.25rem !important;
-
-        border-radius: 16px !important;
-    }
-
-    .cta-panel h2 {
-
-        font-size: 1.3rem !important;
-    }
-
-    /* Prediction form */
-    form[data-testid="stForm"] {
-
-        padding: .9rem !important;
-
-        border-radius: 14px !important;
-    }
-
-    /* Make buttons comfortable for touch */
-    div[data-testid="stButton"] button,
-    div[data-testid="stFormSubmitButton"] button {
-
-        min-height: 44px !important;
-    }
-}
-
-
-/* =====================================================
-   VERY SMALL PHONES
-   ===================================================== */
-
-@media (max-width: 380px) {
-
-    .block-container {
-
-        padding-left: .6rem !important;
-        padding-right: .6rem !important;
-    }
-
-    .dashboard-hero h1 {
-
-        font-size: 1.75rem !important;
-    }
-
-    .hero-fact {
-
-        width: 100% !important;
-    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -629,7 +433,6 @@ def api_metadata() -> dict:
         return {"categorical_options": CATEGORICAL_DEFAULTS}
 
 def render_header() -> str:
-
     pages = [
         ("🏠", "Dashboard"),
         ("🎯", "Prediction"),
@@ -638,69 +441,78 @@ def render_header() -> str:
         ("ℹ️", "About"),
     ]
 
-    current_page = st.session_state.get("nav_page", "Dashboard")
-
-    logo_col, nav_col, menu_col, theme_col = st.columns(
-        [1.8, 5.0, 0.6, 0.6],
-        gap="small"
+    left, navigation, mobile_menu, theme_control = st.columns(
+        [1.7, 4.5, 0.7, 0.7]
     )
 
+    # -------------------------
     # Logo
-    with logo_col:
+    # -------------------------
+    with left:
         st.markdown(
-            """
-            <div class="brand">
-                
-                <div class="brand-text">
-                    Risk<span>Lens</span>
-                </div>
-            </div>
-            """,
+            '<div class="brand">'
+            '<div class="brand-logo">RL</div>'
+            '<div class="brand-text">Risk<span>Lens</span></div>'
+            '</div>',
             unsafe_allow_html=True
         )
 
-    # Desktop navigation
-    with nav_col:
-        nav_cols = st.columns(5, gap="small")
+    # -------------------------
+    # Desktop Navigation
+    # -------------------------
+    with navigation:
+        st.markdown(
+            '<span class="desktop-nav-marker"></span>',
+            unsafe_allow_html=True
+        )
+
+        nav_cols = st.columns(5)
 
         for col, (icon, name) in zip(nav_cols, pages):
             with col:
                 if st.button(
-                    f"{icon} {name}",
+                    f"{icon}  {name}",
                     key=f"nav_{name}",
                     use_container_width=True
                 ):
                     st.session_state["nav_page"] = name
                     st.rerun()
 
-    # Mobile menu
-    with menu_col:
+    # -------------------------
+    # Mobile Hamburger
+    # -------------------------
+    with mobile_menu:
+        st.markdown(
+            '<span class="mobile-menu-marker"></span>',
+            unsafe_allow_html=True
+        )
+
         with st.popover("☰"):
-            st.markdown(
-                "<div class='mobile-menu-title'>RiskLens Menu</div>",
-                unsafe_allow_html=True
-            )
+            st.markdown("### RiskLens")
 
             for icon, name in pages:
                 if st.button(
                     f"{icon}  {name}",
-                    key=f"mobile_{name}",
+                    key=f"mobile_nav_{name}",
                     use_container_width=True
                 ):
                     st.session_state["nav_page"] = name
                     st.rerun()
 
+    # -------------------------
     # Theme
-    with theme_col:
+    # -------------------------
+    with theme_control:
         is_dark = st.session_state["theme"] == "dark"
 
         st.button(
             "☀️" if is_dark else "🌙",
             key="theme_toggle",
-            on_click=toggle_theme
+            on_click=toggle_theme,
+            help="Switch to Light Mode" if is_dark else "Switch to Dark Mode"
         )
 
-    return current_page
+    return st.session_state.get("nav_page", "Dashboard")
 
 def go_to_prediction() -> None:
     st.session_state["nav_page"] = "Prediction"
