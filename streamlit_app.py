@@ -791,14 +791,14 @@ def model_page() -> None:
     m1, m2, m3, m4 = st.columns(4)
 
     with m1:
-    st.metric("Accuracy", "91.20%")
+        st.metric("Accuracy", "91.20%")
 
     with m2:
         st.metric("Precision", "88.60%")
-    
+
     with m3:
         st.metric("Recall", "84.70%")
-    
+
     with m4:
         st.metric("F1 Score", "86.60%")
 
