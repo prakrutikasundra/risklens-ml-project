@@ -110,7 +110,7 @@ def apply_theme() -> None:
 st.markdown("""
 <style>
   #MainMenu, footer, header {visibility:hidden}
-  .block-container{max-width:1240px;padding-top:3.3rem;padding-bottom:3rem}
+  .block-container{max-width:1240px;padding-top:3.2rem;padding-bottom:3rem}
   .stApp{background:#f6f8fc;color:#182230;font-family:Inter,Segoe UI,sans-serif}
   /* Fixed custom navigation shell. The :has selector targets only the header row. */
   div[data-testid="stHorizontalBlock"]:has(.brand){position:fixed;top:0;left:0;right:0;z-index:1000;min-height:76px;padding:0.8rem max(2rem,calc((100vw - 1180px)/2));margin:0;background:rgba(255,255,255,.94);border-bottom:1px solid rgba(226,232,240,.9);box-shadow:0 8px 28px rgba(15,23,42,.08);backdrop-filter:blur(14px);align-items:center;transition:box-shadow .2s ease,background .2s ease}
