@@ -713,13 +713,9 @@ def model_page() -> None:
 
 def about_page() -> None:
 
-    # =========================================================
-    # ABOUT PAGE HEADER
-    # =========================================================
-
+    # Page heading
     st.markdown(
-        """
-        <div style="
+        """<div style="
             margin-bottom: 28px;
         ">
             <div style="
@@ -738,25 +734,19 @@ def about_page() -> None:
             ">
                 Loan Default Intelligence powered by Machine Learning.
             </div>
-        </div>
-        """,
+        </div>""",
         unsafe_allow_html=True
     )
 
-    # =========================================================
-    # INTRODUCTION CARD
-    # =========================================================
-
+    # Introduction
     st.markdown(
-        """
-        <div style="
+        """<div style="
             background: linear-gradient(135deg, #EFF6FF, #F8FAFC);
             border: 1px solid #DBEAFE;
             border-radius: 20px;
             padding: 28px 30px;
             margin-bottom: 28px;
         ">
-
             <div style="
                 font-size: 1.35rem;
                 font-weight: 750;
@@ -777,22 +767,16 @@ def about_page() -> None:
                 It combines data processing, machine learning and
                 an interactive web interface to provide data-driven insights.
             </div>
-
-        </div>
-        """,
+        </div>""",
         unsafe_allow_html=True
     )
 
-    # =========================================================
-    # THREE FEATURE CARDS
-    # =========================================================
-
+    # Feature cards
     col1, col2, col3 = st.columns(3)
 
     with col1:
         st.markdown(
-            """
-            <div style="
+            """<div style="
                 min-height: 205px;
                 padding: 25px;
                 border: 1px solid #DBEAFE;
@@ -800,10 +784,7 @@ def about_page() -> None:
                 background: #FFFFFF;
                 box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
             ">
-                <div style="
-                    font-size: 2rem;
-                    margin-bottom: 12px;
-                ">🧠</div>
+                <div style="font-size: 2rem; margin-bottom: 12px;">🧠</div>
 
                 <div style="
                     font-size: 1.25rem;
@@ -822,15 +803,13 @@ def about_page() -> None:
                     Machine Learning models analyze loan
                     and customer data to identify default risk.
                 </div>
-            </div>
-            """,
+            </div>""",
             unsafe_allow_html=True
         )
 
     with col2:
         st.markdown(
-            """
-            <div style="
+            """<div style="
                 min-height: 205px;
                 padding: 25px;
                 border: 1px solid #DBEAFE;
@@ -838,10 +817,7 @@ def about_page() -> None:
                 background: #FFFFFF;
                 box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
             ">
-                <div style="
-                    font-size: 2rem;
-                    margin-bottom: 12px;
-                ">🛡️</div>
+                <div style="font-size: 2rem; margin-bottom: 12px;">🛡️</div>
 
                 <div style="
                     font-size: 1.25rem;
@@ -861,15 +837,13 @@ def about_page() -> None:
                     data-driven predictions through a
                     structured ML prediction pipeline.
                 </div>
-            </div>
-            """,
+            </div>""",
             unsafe_allow_html=True
         )
 
     with col3:
         st.markdown(
-            """
-            <div style="
+            """<div style="
                 min-height: 205px;
                 padding: 25px;
                 border: 1px solid #DBEAFE;
@@ -877,10 +851,7 @@ def about_page() -> None:
                 background: #FFFFFF;
                 box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
             ">
-                <div style="
-                    font-size: 2rem;
-                    margin-bottom: 12px;
-                ">📊</div>
+                <div style="font-size: 2rem; margin-bottom: 12px;">📊</div>
 
                 <div style="
                     font-size: 1.25rem;
@@ -900,28 +871,22 @@ def about_page() -> None:
                     useful insights for understanding
                     potential default patterns.
                 </div>
-            </div>
-            """,
+            </div>""",
             unsafe_allow_html=True
         )
 
-    # =========================================================
-    # PROJECT HIGHLIGHTS
-    # =========================================================
-
+    # Project Highlights
     st.markdown("<div style='height:32px;'></div>", unsafe_allow_html=True)
 
     st.markdown(
-        """
-        <div style="
+        """<div style="
             font-size: 1.45rem;
             font-weight: 750;
             color: #183B63;
             margin-bottom: 16px;
         ">
             📌 Project Highlights
-        </div>
-        """,
+        </div>""",
         unsafe_allow_html=True
     )
 
@@ -929,8 +894,7 @@ def about_page() -> None:
 
     with h1:
         st.markdown(
-            """
-            <div style="
+            """<div style="
                 text-align:center;
                 padding:20px 10px;
                 border-radius:16px;
@@ -953,15 +917,13 @@ def about_page() -> None:
                 ">
                     Loan Default Prediction
                 </div>
-            </div>
-            """,
+            </div>""",
             unsafe_allow_html=True
         )
 
     with h2:
         st.markdown(
-            """
-            <div style="
+            """<div style="
                 text-align:center;
                 padding:20px 10px;
                 border-radius:16px;
@@ -984,15 +946,13 @@ def about_page() -> None:
                 ">
                     Input Variables
                 </div>
-            </div>
-            """,
+            </div>""",
             unsafe_allow_html=True
         )
 
     with h3:
         st.markdown(
-            """
-            <div style="
+            """<div style="
                 text-align:center;
                 padding:20px 10px;
                 border-radius:16px;
@@ -1015,15 +975,13 @@ def about_page() -> None:
                 ">
                     Historical Data
                 </div>
-            </div>
-            """,
+            </div>""",
             unsafe_allow_html=True
         )
 
     with h4:
         st.markdown(
-            """
-            <div style="
+            """<div style="
                 text-align:center;
                 padding:20px 10px;
                 border-radius:16px;
@@ -1046,24 +1004,19 @@ def about_page() -> None:
                 ">
                     Target Variable
                 </div>
-            </div>
-            """,
+            </div>""",
             unsafe_allow_html=True
         )
 
-    # =========================================================
-    # TECHNOLOGY STACK
-    # =========================================================
-
+    # Technology Stack
     st.markdown("<div style='height:32px;'></div>", unsafe_allow_html=True)
 
     st.markdown(
-        """
-        <div style="
-            font-size: 1.45rem;
-            font-weight: 750;
-            color: #183B63;
-            margin-bottom: 15px;
+        """<div style="
+            font-size:1.45rem;
+            font-weight:750;
+            color:#183B63;
+            margin-bottom:15px;
         ">
             ⚙️ Technology Stack
         </div>
@@ -1133,19 +1086,14 @@ def about_page() -> None:
                 font-weight:650;
                 font-size:0.88rem;
             ">☁️ Render</span>
-        </div>
-        """,
+        </div>""",
         unsafe_allow_html=True
     )
 
-    # =========================================================
-    # FINAL PROJECT MESSAGE
-    # =========================================================
-
+    # Final project message
     st.markdown(
-        """
-        <div style="
-            background: linear-gradient(135deg, #183B63, #2563EB);
+        """<div style="
+            background:linear-gradient(135deg,#183B63,#2563EB);
             border-radius:20px;
             padding:25px 28px;
             margin-top:8px;
@@ -1169,11 +1117,9 @@ def about_page() -> None:
                 API-based prediction and an interactive dashboard into one
                 complete loan default intelligence system.
             </div>
-        </div>
-        """,
+        </div>""",
         unsafe_allow_html=True
     )
-
 
 page = render_header()
 
