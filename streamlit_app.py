@@ -711,35 +711,117 @@ def model_page() -> None:
     st.subheader("Target variable"); st.code("default  (0 = No Default, 1 = Default)")
     st.subheader("Feature order used during inference"); render_dataframe(pd.DataFrame({"Position": range(1, 17), "Feature": FEATURE_ORDER}), hide_index=True, use_container_width=True)
 
-
 def about_page() -> None:
 
+    # =========================================================
+    # ABOUT PAGE HEADER
+    # =========================================================
+
     st.markdown(
-        '<div class="section-title">About RiskLens</div>'
-        '<p class="muted">Loan Default Intelligence powered by Machine Learning.</p>',
+        """
+        <div style="
+            margin-bottom: 28px;
+        ">
+            <div style="
+                font-size: 2.4rem;
+                font-weight: 800;
+                color: #183B63;
+                letter-spacing: -0.5px;
+            ">
+                About <span style="color:#2563EB;">RiskLens</span>
+            </div>
+
+            <div style="
+                margin-top: 8px;
+                font-size: 1.05rem;
+                color: #64748B;
+            ">
+                Loan Default Intelligence powered by Machine Learning.
+            </div>
+        </div>
+        """,
         unsafe_allow_html=True
     )
 
-    # About RiskLens visual
-    about_image = PROJECT_ROOT / "assets" / "about_risklens.png"
+    # =========================================================
+    # INTRODUCTION CARD
+    # =========================================================
 
-    if about_image.exists():
-        st.image(
-            str(about_image),
-            use_container_width=True
-        )
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(135deg, #EFF6FF, #F8FAFC);
+            border: 1px solid #DBEAFE;
+            border-radius: 20px;
+            padding: 28px 30px;
+            margin-bottom: 28px;
+        ">
 
-    st.markdown("<br>", unsafe_allow_html=True)
+            <div style="
+                font-size: 1.35rem;
+                font-weight: 750;
+                color: #183B63;
+                margin-bottom: 10px;
+            ">
+                🎯 What is RiskLens?
+            </div>
 
-    # Project information
+            <div style="
+                font-size: 1rem;
+                line-height: 1.75;
+                color: #475569;
+            ">
+                RiskLens is a Machine Learning based loan default
+                prediction system designed to analyze customer and
+                loan information and identify potential default risk.
+                It combines data processing, machine learning and
+                an interactive web interface to provide data-driven insights.
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # =========================================================
+    # THREE FEATURE CARDS
+    # =========================================================
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
         st.markdown(
             """
-            <div class="info-card">
-                <h3>🧠 AI Driven</h3>
-                <p>Machine Learning models analyze loan data and identify default risk.</p>
+            <div style="
+                min-height: 205px;
+                padding: 25px;
+                border: 1px solid #DBEAFE;
+                border-radius: 18px;
+                background: #FFFFFF;
+                box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+            ">
+                <div style="
+                    font-size: 2rem;
+                    margin-bottom: 12px;
+                ">🧠</div>
+
+                <div style="
+                    font-size: 1.25rem;
+                    font-weight: 750;
+                    color: #183B63;
+                    margin-bottom: 10px;
+                ">
+                    AI Driven
+                </div>
+
+                <div style="
+                    color: #64748B;
+                    line-height: 1.65;
+                    font-size: 0.95rem;
+                ">
+                    Machine Learning models analyze loan
+                    and customer data to identify default risk.
+                </div>
             </div>
             """,
             unsafe_allow_html=True
@@ -748,9 +830,37 @@ def about_page() -> None:
     with col2:
         st.markdown(
             """
-            <div class="info-card">
-                <h3>🛡️ Reliable</h3>
-                <p>RiskLens provides consistent and data-driven loan predictions.</p>
+            <div style="
+                min-height: 205px;
+                padding: 25px;
+                border: 1px solid #DBEAFE;
+                border-radius: 18px;
+                background: #FFFFFF;
+                box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+            ">
+                <div style="
+                    font-size: 2rem;
+                    margin-bottom: 12px;
+                ">🛡️</div>
+
+                <div style="
+                    font-size: 1.25rem;
+                    font-weight: 750;
+                    color: #183B63;
+                    margin-bottom: 10px;
+                ">
+                    Reliable
+                </div>
+
+                <div style="
+                    color: #64748B;
+                    line-height: 1.65;
+                    font-size: 0.95rem;
+                ">
+                    RiskLens provides consistent,
+                    data-driven predictions through a
+                    structured ML prediction pipeline.
+                </div>
             </div>
             """,
             unsafe_allow_html=True
@@ -759,13 +869,311 @@ def about_page() -> None:
     with col3:
         st.markdown(
             """
-            <div class="info-card">
-                <h3>📊 Data Powered</h3>
-                <p>Insights are generated from historical loan and customer data.</p>
+            <div style="
+                min-height: 205px;
+                padding: 25px;
+                border: 1px solid #DBEAFE;
+                border-radius: 18px;
+                background: #FFFFFF;
+                box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+            ">
+                <div style="
+                    font-size: 2rem;
+                    margin-bottom: 12px;
+                ">📊</div>
+
+                <div style="
+                    font-size: 1.25rem;
+                    font-weight: 750;
+                    color: #183B63;
+                    margin-bottom: 10px;
+                ">
+                    Data Powered
+                </div>
+
+                <div style="
+                    color: #64748B;
+                    line-height: 1.65;
+                    font-size: 0.95rem;
+                ">
+                    Historical loan data is transformed into
+                    useful insights for understanding
+                    potential default patterns.
+                </div>
             </div>
             """,
             unsafe_allow_html=True
         )
+
+    # =========================================================
+    # PROJECT HIGHLIGHTS
+    # =========================================================
+
+    st.markdown("<div style='height:32px;'></div>", unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        <div style="
+            font-size: 1.45rem;
+            font-weight: 750;
+            color: #183B63;
+            margin-bottom: 16px;
+        ">
+            📌 Project Highlights
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    h1, h2, h3, h4 = st.columns(4)
+
+    with h1:
+        st.markdown(
+            """
+            <div style="
+                text-align:center;
+                padding:20px 10px;
+                border-radius:16px;
+                background:#FFFFFF;
+                border:1px solid #E2E8F0;
+            ">
+                <div style="font-size:1.7rem;">🤖</div>
+                <div style="
+                    font-size:1.05rem;
+                    font-weight:700;
+                    color:#183B63;
+                    margin-top:8px;
+                ">
+                    ML Model
+                </div>
+                <div style="
+                    font-size:0.82rem;
+                    color:#64748B;
+                    margin-top:4px;
+                ">
+                    Loan Default Prediction
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with h2:
+        st.markdown(
+            """
+            <div style="
+                text-align:center;
+                padding:20px 10px;
+                border-radius:16px;
+                background:#FFFFFF;
+                border:1px solid #E2E8F0;
+            ">
+                <div style="font-size:1.7rem;">🔢</div>
+                <div style="
+                    font-size:1.05rem;
+                    font-weight:700;
+                    color:#183B63;
+                    margin-top:8px;
+                ">
+                    16 Features
+                </div>
+                <div style="
+                    font-size:0.82rem;
+                    color:#64748B;
+                    margin-top:4px;
+                ">
+                    Input Variables
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with h3:
+        st.markdown(
+            """
+            <div style="
+                text-align:center;
+                padding:20px 10px;
+                border-radius:16px;
+                background:#FFFFFF;
+                border:1px solid #E2E8F0;
+            ">
+                <div style="font-size:1.7rem;">📁</div>
+                <div style="
+                    font-size:1.05rem;
+                    font-weight:700;
+                    color:#183B63;
+                    margin-top:8px;
+                ">
+                    Loan Dataset
+                </div>
+                <div style="
+                    font-size:0.82rem;
+                    color:#64748B;
+                    margin-top:4px;
+                ">
+                    Historical Data
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with h4:
+        st.markdown(
+            """
+            <div style="
+                text-align:center;
+                padding:20px 10px;
+                border-radius:16px;
+                background:#FFFFFF;
+                border:1px solid #E2E8F0;
+            ">
+                <div style="font-size:1.7rem;">🎯</div>
+                <div style="
+                    font-size:1.05rem;
+                    font-weight:700;
+                    color:#183B63;
+                    margin-top:8px;
+                ">
+                    Default
+                </div>
+                <div style="
+                    font-size:0.82rem;
+                    color:#64748B;
+                    margin-top:4px;
+                ">
+                    Target Variable
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    # =========================================================
+    # TECHNOLOGY STACK
+    # =========================================================
+
+    st.markdown("<div style='height:32px;'></div>", unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        <div style="
+            font-size: 1.45rem;
+            font-weight: 750;
+            color: #183B63;
+            margin-bottom: 15px;
+        ">
+            ⚙️ Technology Stack
+        </div>
+
+        <div style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-bottom:25px;
+        ">
+            <span style="
+                padding:8px 15px;
+                background:#EFF6FF;
+                border:1px solid #BFDBFE;
+                border-radius:20px;
+                color:#2563EB;
+                font-weight:650;
+                font-size:0.88rem;
+            ">🐍 Python</span>
+
+            <span style="
+                padding:8px 15px;
+                background:#EFF6FF;
+                border:1px solid #BFDBFE;
+                border-radius:20px;
+                color:#2563EB;
+                font-weight:650;
+                font-size:0.88rem;
+            ">📊 Pandas</span>
+
+            <span style="
+                padding:8px 15px;
+                background:#EFF6FF;
+                border:1px solid #BFDBFE;
+                border-radius:20px;
+                color:#2563EB;
+                font-weight:650;
+                font-size:0.88rem;
+            ">🤖 Scikit-learn</span>
+
+            <span style="
+                padding:8px 15px;
+                background:#EFF6FF;
+                border:1px solid #BFDBFE;
+                border-radius:20px;
+                color:#2563EB;
+                font-weight:650;
+                font-size:0.88rem;
+            ">🌐 Flask</span>
+
+            <span style="
+                padding:8px 15px;
+                background:#EFF6FF;
+                border:1px solid #BFDBFE;
+                border-radius:20px;
+                color:#2563EB;
+                font-weight:650;
+                font-size:0.88rem;
+            ">🎨 Streamlit</span>
+
+            <span style="
+                padding:8px 15px;
+                background:#EFF6FF;
+                border:1px solid #BFDBFE;
+                border-radius:20px;
+                color:#2563EB;
+                font-weight:650;
+                font-size:0.88rem;
+            ">☁️ Render</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # =========================================================
+    # FINAL PROJECT MESSAGE
+    # =========================================================
+
+    st.markdown(
+        """
+        <div style="
+            background: linear-gradient(135deg, #183B63, #2563EB);
+            border-radius:20px;
+            padding:25px 28px;
+            margin-top:8px;
+            margin-bottom:10px;
+            color:white;
+        ">
+            <div style="
+                font-size:1.25rem;
+                font-weight:750;
+                margin-bottom:7px;
+            ">
+                💡 Smarter Loan Risk Analysis
+            </div>
+
+            <div style="
+                font-size:0.95rem;
+                line-height:1.65;
+                opacity:0.92;
+            ">
+                RiskLens brings together data preparation, machine learning,
+                API-based prediction and an interactive dashboard into one
+                complete loan default intelligence system.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
 page = render_header()
 
